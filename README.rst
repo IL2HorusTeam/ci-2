@@ -1,4 +1,4 @@
-CI-2
-====
+demo-services
+=============
 
-Online config editor for IL-2 FB Dedicated Server.
+Services used for demonstration of usage of libraries created by IL2HorusTeam.
