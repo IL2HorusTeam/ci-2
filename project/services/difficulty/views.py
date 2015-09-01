@@ -13,17 +13,17 @@ from il2fb.config.difficulty.constants import (
 )
 from il2fb.config.difficulty.exceptions import LockedParameterException
 
-from ..app import app
+from project.app import app
 
 
 __all__ = ('data_view', 'decompose_view', 'toggle_parameter_view', )
 
 
-def route(path, *args, **kwargs):
+def api_route(path, *args, **kwargs):
     return app.route("/api/v1/difficulty/{0}".format(path), *args, **kwargs)
 
 
-@route('data', methods=['GET'])
+@api_route('data', methods=['GET'])
 def data_view():
     presets = serialize_presets(PRESETS)
     settings = serialize_settings(SETTINGS)
@@ -31,7 +31,7 @@ def data_view():
     return jsonify(presets=presets, settings=settings)
 
 
-@route('decompose', methods=['POST'])
+@api_route('decompose', methods=['POST'])
 def decompose_view():
     difficulty = int(request.form['difficulty'])
     difficulty, __ = autocorrect_difficulty(difficulty)
@@ -55,7 +55,7 @@ def decompose_view():
     return jsonify(difficulty=difficulty, parameters=parameters, locked=locked)
 
 
-@route('toggle_parameter', methods=['POST'])
+@api_route('toggle_parameter', methods=['POST'])
 def toggle_parameter_view():
     difficulty = int(request.form['difficulty'])  # without autocorrection
 

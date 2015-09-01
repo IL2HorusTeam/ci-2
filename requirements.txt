@@ -1,11 +1,16 @@
 Flask==0.10.1
-Flask-Sockets==0.1
 Flask-Cors==2.1.0
+Flask-Sockets==0.1
 
+candv>=1.2.0
 gunicorn==19.3.0
-six==1.9.0
+python-Levenshtein==0.12.0
+six>=1.6.1
+ujson==1.33
+
+# Waiting for githubpy==1.1.1 to be released
+-e git+https://github.com/michaelliao/githubpy.git#egg=githubpy
 
 -e git+https://github.com/IL2HorusTeam/il2fb-commons.git#egg=il2fb-commons
 -e git+https://github.com/IL2HorusTeam/il2fb-difficulty.git#egg=il2fb-difficulty
-
--r project/bug_reporter/requirements.txt
+-e git+https://github.com/IL2HorusTeam/il2fb-events-parser.git#egg=il2fb-events-parser
