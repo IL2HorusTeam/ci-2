@@ -7,3 +7,5 @@ six==1.9.0
 
 -e git+https://github.com/IL2HorusTeam/il2fb-commons.git#egg=il2fb-commons
 -e git+https://github.com/IL2HorusTeam/il2fb-difficulty.git#egg=il2fb-difficulty
+
+-r project/bug_reporter/requirements.txt
