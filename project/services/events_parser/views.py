@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import ujson as json
+import six
 import traceback
+import ujson as json
 
 from geventwebsocket.exceptions import WebSocketError
 from operator import itemgetter
@@ -19,22 +20,23 @@ from .serializers import shorten_issue
 __all__ = ('parse', )
 
 
-def api_route(path, *args, **kwargs):
+def get_route(router, path, *args, **kwargs):
     full_path = "/api/v1/events-parser/{0}".format(path)
-    return app.route(full_path, *args, **kwargs)
+    return router.route(full_path, *args, **kwargs)
+
+
+def api_route(path, *args, **kwargs):
+    return get_route(app, path, *args, **kwargs)
 
 
 def ws_route(path, *args, **kwargs):
-    full_path = "/ws/v1/events-parser/{0}".format(path)
-    return sockets.route(full_path, *args, **kwargs)
+    return get_route(sockets, path, *args, **kwargs)
 
 
 @api_route('data', methods=['GET'])
 def get_data_view():
-    supported_events = get_supported_events()
     return APISuccess({
-        'supported_events': supported_events,
-        'test_data': get_test_data(supported_events),
+        'supported_events': get_supported_events(),
     })
 
 
@@ -42,28 +44,19 @@ def get_supported_events():
     import il2fb.parsers.events.structures.events as events_structures
 
     def description(structure):
-        return structure.__doc__.strip().replace('::', ':').replace('    ', '')
+        return six.text_type(
+            structure.__doc__.strip().replace('::', ':').replace('    ', '')
+        )
 
     result = (
         getattr(events_structures, name)
         for name in events_structures.__all__
     )
     result = (
-        (x.verbose_name, description(x))
+        (six.text_type(x.verbose_name), description(x))
         for x in result
     )
     return sorted(result, key=itemgetter(0))
-
-
-def get_test_data(supported_events):
-    descriptions = map(itemgetter(1), supported_events)
-    examples = (
-        x[1:-1]
-        for d in descriptions
-        for x in d.splitlines()
-        if x.startswith('"') and x.endswith('"')
-    )
-    return '\\n'.join(examples)
 
 
 @ws_route('parse')
