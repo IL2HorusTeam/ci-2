@@ -14,3 +14,4 @@ ujson==1.33
 -e git+https://github.com/IL2HorusTeam/il2fb-commons.git#egg=il2fb-commons
 -e git+https://github.com/IL2HorusTeam/il2fb-difficulty.git#egg=il2fb-difficulty
 -e git+https://github.com/IL2HorusTeam/il2fb-events-parser.git#egg=il2fb-events-parser
+-e git+https://github.com/IL2HorusTeam/il2fb-mission-parser.git#egg=il2fb-mission-parser
