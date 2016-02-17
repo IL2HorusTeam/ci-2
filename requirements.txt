@@ -4,6 +4,7 @@ Flask-Sockets==0.1
 
 candv>=1.2.0
 gunicorn==19.3.0
+honcho==0.6.6
 python-Levenshtein==0.12.0
 six>=1.6.1
 ujson==1.33

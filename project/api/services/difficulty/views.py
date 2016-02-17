@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import itertools
-import six
 
-from flask import jsonify, request
+from flask import request
 
 from il2fb.config.difficulty import (
     decompose, autocorrect_difficulty, get_actual_rules, toggle_parameter,
@@ -14,6 +13,9 @@ from il2fb.config.difficulty.constants import (
 from il2fb.config.difficulty.exceptions import LockedParameterException
 
 from project.app import app
+from project.api.response.rest import RESTSuccess, RESTConflict
+
+from .serializers import serialize_presets, serialize_settings
 
 
 __all__ = ('data_view', 'decompose_view', 'toggle_parameter_view', )
@@ -27,8 +29,10 @@ def api_route(path, *args, **kwargs):
 def data_view():
     presets = serialize_presets(PRESETS)
     settings = serialize_settings(SETTINGS)
-
-    return jsonify(presets=presets, settings=settings)
+    return RESTSuccess({
+        'presets': presets,
+        'settings': settings,
+    })
 
 
 @api_route('decompose', methods=['POST'])
@@ -52,7 +56,11 @@ def decompose_view():
         for parameter in set(itertools.chain(*locked))
     ]
 
-    return jsonify(difficulty=difficulty, parameters=parameters, locked=locked)
+    return RESTSuccess({
+        'difficulty': difficulty,
+        'parameters': parameters,
+        'locked': locked,
+    })
 
 
 @api_route('toggle_parameter', methods=['POST'])
@@ -69,42 +77,14 @@ def toggle_parameter_view():
                                                     parameter,
                                                     value)
     except LockedParameterException as e:
-        return jsonify(error=six.text_type(e))
+        return RESTConflict(detail=e)
 
     side_effects = {
         rule_type.name.lower(): [parameter.value for parameter in parameters]
         for rule_type, parameters in side_effects.items()
     }
 
-    return jsonify(difficulty=difficulty, side_effects=side_effects)
-
-
-def serialize_presets(presets):
-    return [
-        {
-            'title': six.text_type(k.verbose_name),
-            'value': v,
-        } for k, v in presets.items()
-    ]
-
-
-def serialize_settings(settings):
-    result = []
-
-    for tab, parameters in settings.items():
-        result.append({
-            'tab': {
-                'code': tab.name.lower(),
-                'title': six.text_type(tab.verbose_name),
-            },
-            'parameters': [
-                {
-                    'code': parameter.value,
-                    'title': six.text_type(parameter.verbose_name),
-                    'help_text': six.text_type(parameter.help_text or '')
-                }
-                for parameter in parameters
-            ],
-        })
-
-    return result
+    return RESTSuccess({
+        'difficulty': difficulty,
+        'side_effects': side_effects,
+    })
