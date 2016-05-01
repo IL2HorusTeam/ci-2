@@ -12,20 +12,16 @@ from il2fb.config.difficulty.constants import (
 )
 from il2fb.config.difficulty.exceptions import LockedParameterException
 
-from project.app import app
+from project.api.blueprints import RESTBlueprint
 from project.api.response.rest import RESTSuccess, RESTConflict
 
 from .serializers import serialize_presets, serialize_settings
 
 
-__all__ = ('data_view', 'decompose_view', 'toggle_parameter_view', )
+rest = RESTBlueprint(r'difficulty', __name__)
 
 
-def api_route(path, *args, **kwargs):
-    return app.route("/api/v1/difficulty/{0}".format(path), *args, **kwargs)
-
-
-@api_route('data', methods=['GET'])
+@rest.route(r'/data', methods=['GET'])
 def data_view():
     presets = serialize_presets(PRESETS)
     settings = serialize_settings(SETTINGS)
@@ -35,7 +31,7 @@ def data_view():
     })
 
 
-@api_route('decompose', methods=['POST'])
+@rest.route(r'/decompose', methods=['POST'])
 def decompose_view():
     difficulty = int(request.form['difficulty'])
     difficulty, __ = autocorrect_difficulty(difficulty)
@@ -63,7 +59,7 @@ def decompose_view():
     })
 
 
-@api_route('toggle_parameter', methods=['POST'])
+@rest.route(r'/toggle_parameter', methods=['POST'])
 def toggle_parameter_view():
     difficulty = int(request.form['difficulty'])  # without autocorrection
 
@@ -73,9 +69,7 @@ def toggle_parameter_view():
     value = request.form['value'] == 'true'
 
     try:
-        difficulty, side_effects = toggle_parameter(difficulty,
-                                                    parameter,
-                                                    value)
+        difficulty, side_effects = toggle_parameter(difficulty, parameter, value)
     except LockedParameterException as e:
         return RESTConflict(detail=e)
 

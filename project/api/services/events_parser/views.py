@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
 import traceback
-import ujson as json
-
-from geventwebsocket.exceptions import WebSocketError
 
 from il2fb.parsers.events import EventsParser
 from il2fb.parsers.events.exceptions import EventParsingError
 
-from project.app import app, sockets
+from project.app import app
+from project.api.blueprints import RESTBlueprint, WSBlueprint
+from project.api.views import WebSocketView
 from project.api.response.rest import RESTSuccess
 from project.api.response.ws import WSSuccess, WSError, WSWarning
 
@@ -17,59 +16,23 @@ from .reporting import reporter
 from .serializers import shorten_issue
 
 
-__all__ = ('parse', )
+rest = RESTBlueprint(r'events-parser', __name__)
+ws = WSBlueprint(r'events-parser', __name__)
 
 parse_string = EventsParser().parse_string
 
 
-def get_route(router, path, *args, **kwargs):
-    full_path = "/api/v1/events-parser/{0}".format(path)
-    return router.route(full_path, *args, **kwargs)
-
-
-def api_route(path, *args, **kwargs):
-    return get_route(app, path, *args, **kwargs)
-
-
-def ws_route(path, *args, **kwargs):
-    return get_route(sockets, path, *args, **kwargs)
-
-
-@api_route('data', methods=['GET'])
-def get_data_view():
+@rest.route(r'/data', methods=['GET'])
+def get_data():
     return RESTSuccess({
         'supported_events': get_supported_events(),
     })
 
 
-class ParseView(object):
+class ParseView(WebSocketView):
 
-    def __call__(self, ws):
-        self.ws = ws
-        while True:
-            data = self.receive_data()
-            if data is None:
-                break
-            else:
-                self.try_to_parse_string(data.get('string'))
-
-    def receive_data(self):
-        try:
-            message = self.ws.receive()
-        except WebSocketError:
-            message = None
-
-        if message is not None:
-            try:
-                data = json.loads(message)
-            except ValueError as e:
-                app.logger.exception(
-                    "Failed to read message '{:}':".format(message))
-                self.ws.send(WSError(detail=e))
-            else:
-                return data
-
-    def try_to_parse_string(self, string):
+    def on_message(self, message):
+        string = message.get('string')
         if string:
             try:
                 event = parse_string(string).to_primitive()
@@ -116,4 +79,5 @@ class ParseView(object):
             issue = shorten_issue(issue)
             self.ws.send(WSSuccess({'issue': issue}))
 
-parse = ws_route('parse')(ParseView())
+
+ws.add_view_url_rule(r'/parse', ParseView)

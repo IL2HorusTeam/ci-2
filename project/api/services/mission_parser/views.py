@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from project.app import app
+from project.api.blueprints import RESTBlueprint
 from project.api.response.rest import RESTSuccess
 
 
-__all__ = ('parse', )
+rest = RESTBlueprint(r'mission-parser', __name__)
 
 
-def api_route(path, *args, **kwargs):
-    return app.route("/api/v1/mission-parser/{0}".format(path), *args, **kwargs)
-
-
-@api_route('parse', methods=['POST'])
+@rest.route(r'/parse', methods=['POST'])
 def parse():
     return RESTSuccess(detail="hello!")

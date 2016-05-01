@@ -1,13 +1,15 @@
 Flask==0.10.1
 Flask-Cors==2.1.0
-Flask-Sockets==0.1
+Flask-Sockets==0.2.0
 
+awesome-slugify==1.6.5
 candv>=1.2.0
 gunicorn==19.3.0
 honcho==0.6.6
 python-Levenshtein==0.12.0
 six>=1.6.1
 ujson==1.33
+Unipath==1.1
 
 # Waiting for githubpy==1.1.1 to be released
 -e git+https://github.com/michaelliao/githubpy.git#egg=githubpy
