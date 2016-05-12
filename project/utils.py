@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 
 
 # Fake unicode literal support:  Python 3.2 doesn't have the u'' marker for

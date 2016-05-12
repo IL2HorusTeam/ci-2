@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 
 from project.api.blueprints import RESTBlueprint
 from project.api.response.rest import RESTSuccess
