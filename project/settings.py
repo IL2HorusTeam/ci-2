@@ -10,7 +10,7 @@ env = os.getenv
 
 TMP_ROOT = Path(tempfile.gettempdir()).child('il2fb-demo-services')
 if not TMP_ROOT.exists():
-    TMP_ROOT.mkdir(parents=True)
+    TMP_ROOT.mkdir()
 
 
 # -----------------------------------------------------------------------------
@@ -24,7 +24,7 @@ MAX_CONTENT_LENGTH = 1 * 1024 * 1024  # 1 MiB for uploads
 
 UPLOAD_FOLDER = TMP_ROOT.child('uploads')
 if not UPLOAD_FOLDER.exists():
-    UPLOAD_FOLDER.mkdir(parents=True)
+    UPLOAD_FOLDER.mkdir()
 
 
 # -----------------------------------------------------------------------------
