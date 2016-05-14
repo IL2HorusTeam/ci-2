@@ -13,7 +13,6 @@ from project.api.response.ws import WSSuccess, WSError, WSWarning
 
 from .helpers import get_supported_events
 from .reporting import reporter
-from .serializers import shorten_issue
 
 
 rest = RESTBlueprint(r'events-parser', __name__)
@@ -46,7 +45,8 @@ class ParseView(WebSocketView):
     def on_error(self, string):
         app.logger.exception(string)
 
-        similar = map(shorten_issue, reporter.get_similar_issues(title=string))
+        similar = map(reporter.shorten_issue,
+                      reporter.get_similar_issues(title=string))
         payload = {
             'similar': similar,
             'traceback': traceback.format_exc(),
@@ -54,7 +54,7 @@ class ParseView(WebSocketView):
 
         issue = reporter.get_issue(string)
         if issue:
-            issue = shorten_issue(issue)
+            issue = reporter.shorten_issue(issue)
             payload['issue'] = issue
 
             if issue['state'] == 'open' or not issue['is_valid']:
@@ -76,7 +76,7 @@ class ParseView(WebSocketView):
         data = self.receive_data()
         if data and data.get('confirm'):
             issue = reporter.report_issue(title=title)
-            issue = shorten_issue(issue)
+            issue = reporter.shorten_issue(issue)
             self.ws.send(WSSuccess({'issue': issue}))
 
 

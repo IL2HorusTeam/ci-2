@@ -25,4 +25,5 @@ def not_found_handler(error):
 
 @app.errorhandler(Exception)
 def internal_server_error_handler(error):
+    app.logger.exception("Unhandled exception")
     return RESTInternalServerError()

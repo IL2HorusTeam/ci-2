@@ -32,7 +32,6 @@ if not UPLOAD_FOLDER.exists():
 # -----------------------------------------------------------------------------
 
 DEFAULT_GITHUB_REPO_OWNER = env('DEFAULT_GITHUB_REPO_OWNER', 'IL2HorusTeam')
-DEFAULT_GITHUB_REPORT_ISSUES = int(env('DEFAULT_GITHUB_REPORT_ISSUES', 0)) == 1
 DEFAULT_GITHUB_ACCESS_TOKEN = env('DEFAULT_GITHUB_ACCESS_TOKEN', None)
 
 

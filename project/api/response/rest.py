@@ -1,9 +1,10 @@
 # coding: utf-8
 
-import ujson as json
 import six
 
 from flask import Response, current_app, request
+
+from project.utils import json
 
 
 class RESTResponse(Response):

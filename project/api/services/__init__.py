@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from project.utils import import_object
+from project.utils.lang import import_object
 
 
 def register_blueprints(target, blueprints):
