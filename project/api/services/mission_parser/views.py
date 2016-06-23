@@ -64,7 +64,7 @@ class MissionParseView(MethodView):
             raise ValueError("Please, select a mission for parsing.")
 
         if not self._file_is_allowed(f):
-            raise ValueError(detail="Sorry, invalid file format.")
+            raise ValueError("Sorry, invalid file format.")
 
     def _file_is_allowed(self, f):
         filename = f.filename.lower()
