@@ -39,7 +39,7 @@ class MissionParseView(MethodView):
         except MissionParsingError as e:
             return RESTInternalServerError(
                 payload=self._on_parsing_error(e),
-                detail="Mission parsing error.")
+                detail="Failed to parse mission '{}'.".format(f.filename))
         finally:
             self._remove_file()
 
@@ -77,7 +77,7 @@ class MissionParseView(MethodView):
         return MissionParser().parse(self.file_path)
 
     def _on_parsing_error(self, e):
-        app.logger.exception("Failed to parse mission")
+        app.logger.exception("Failed to parse mission.")
 
         issue_title = repr(e)
         issue = reporter.get_issue(issue_title)
@@ -88,7 +88,7 @@ class MissionParseView(MethodView):
             issue = reporter.report_issue(
                 title=issue_title,
                 description=self._get_issue_info())
-        elif issue['is_valid'] and issue['state'] != 'open':
+        elif reporter.is_valid(issue) and issue['state'] != 'open':
             reporter.reopen_issue(
                 issue=issue,
                 comment=self._get_issue_info())
