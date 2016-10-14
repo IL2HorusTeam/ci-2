@@ -17,7 +17,7 @@ Unipath==1.1
 # Waiting for githubpy==1.1.1 to be released
 -e git+https://github.com/michaelliao/githubpy.git#egg=githubpy
 
--e git+https://github.com/IL2HorusTeam/il2fb-commons.git#egg=il2fb-commons
--e git+https://github.com/IL2HorusTeam/il2fb-difficulty.git#egg=il2fb-difficulty
--e git+https://github.com/IL2HorusTeam/il2fb-events-parser.git#egg=il2fb-events-parser
--e git+https://github.com/IL2HorusTeam/il2fb-mission-parser.git#egg=il2fb-mission-parser
+-e git+https://github.com/IL2HorusTeam/il2fb-commons.git@6868d88#egg=il2fb-commons
+-e git+https://github.com/IL2HorusTeam/il2fb-difficulty.git@e0c120f#egg=il2fb-difficulty
+-e git+https://github.com/IL2HorusTeam/il2fb-events-parser.git@59adfcb#egg=il2fb-events-parser
+-e git+https://github.com/IL2HorusTeam/il2fb-mission-parser.git@7fecdac#egg=il2fb-mission-parser
