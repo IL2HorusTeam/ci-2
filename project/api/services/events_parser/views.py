@@ -18,7 +18,7 @@ from .reporting import reporter
 rest = RESTBlueprint(r'events-parser', __name__)
 ws = WSBlueprint(r'events-parser', __name__)
 
-parse_string = EventsParser().parse_string
+parse_string = EventsParser().parse
 
 
 @rest.route(r'/data', methods=['GET'])
@@ -66,15 +66,15 @@ class ParseView(WebSocketView):
 
     def reopen_issue(self, issue, payload):
         self.ws.send(WSWarning(payload=payload))
-        data = self.receive_data()
-        if data and data.get('confirm'):
+        message = self.receive_message()
+        if message and message.get('confirm'):
             reporter.reopen_issue(issue)
             self.ws.send(WSSuccess())
 
     def report_new_issue(self, title, payload):
         self.ws.send(WSWarning(payload=payload))
-        data = self.receive_data()
-        if data and data.get('confirm'):
+        message = self.receive_message()
+        if message and message.get('confirm'):
             issue = reporter.report_issue(title=title)
             issue = reporter.shorten_issue(issue)
             self.ws.send(WSSuccess({'issue': issue}))

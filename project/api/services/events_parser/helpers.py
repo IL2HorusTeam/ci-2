@@ -6,7 +6,7 @@ from operator import itemgetter
 
 
 def get_supported_events():
-    import il2fb.parsers.events.structures.events as events_structures
+    from il2fb.parsers.events.events import get_all_events
 
     def description(structure):
         return six.text_type(
@@ -14,11 +14,7 @@ def get_supported_events():
         )
 
     result = (
-        getattr(events_structures, name)
-        for name in events_structures.__all__
-    )
-    result = (
         (six.text_type(x.verbose_name), description(x))
-        for x in result
+        for x in get_all_events()
     )
     return sorted(result, key=itemgetter(0))
