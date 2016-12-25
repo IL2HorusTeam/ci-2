@@ -14,6 +14,7 @@ def register_rest_blueprints(app):
         (r'/api/difficulty', 'difficulty.views.rest'),
         (r'/api/mission-parser', 'mission_parser.views.rest'),
         (r'/api/events-parser', 'events_parser.views.rest'),
+        (r'/api/ds-config', 'ds_config.views.rest'),
     ])
 
 
