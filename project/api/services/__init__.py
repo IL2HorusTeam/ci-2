@@ -11,14 +11,14 @@ def register_blueprints(target, blueprints):
 
 def register_rest_blueprints(app):
     register_blueprints(app, [
-        (r'/api/difficulty', 'difficulty.views.rest'),
-        (r'/api/mission-parser', 'mission_parser.views.rest'),
-        (r'/api/events-parser', 'events_parser.views.rest'),
-        (r'/api/ds-config', 'ds_config.views.rest'),
+        (r'/difficulty', 'difficulty.views.rest'),
+        (r'/mission-parser', 'mission_parser.views.rest'),
+        (r'/events-parser', 'events_parser.views.rest'),
+        (r'/ds-config', 'ds_config.views.rest'),
     ])
 
 
 def register_ws_blueprints(sockets):
     register_blueprints(sockets, [
-        (r'/api/events-parser', 'events_parser.views.ws'),
+        (r'/events-parser', 'events_parser.views.ws'),
     ])
