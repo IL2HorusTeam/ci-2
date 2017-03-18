@@ -3,6 +3,10 @@
 from project.utils.lang import import_object
 
 
+def health():
+    return ('', 200)
+
+
 def register_blueprints(target, blueprints):
     for url_prefix, blueprint_path in blueprints:
         blueprint = import_object("{}.{}".format(__package__, blueprint_path))
@@ -16,6 +20,7 @@ def register_rest_blueprints(app):
         (r'/events-parser', 'events_parser.views.rest'),
         (r'/ds-config', 'ds_config.views.rest'),
     ])
+    app.route(r'/health')(health)
 
 
 def register_ws_blueprints(sockets):
