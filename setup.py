@@ -50,6 +50,7 @@ setup(
         'il2fb.demo_services.core',
         'il2fb.demo_services.core.response',
         'il2fb.demo_services.difficulty',
+        'il2fb.demo_services.events_parser',
     ],
     include_package_data=True,
     install_requires=REQUIREMENTS,
@@ -70,6 +71,7 @@ setup(
     entry_points={
         'console_scripts': [
             'il2fb-demo-difficulty = il2fb.demo_services.difficulty.main:main',
+            'il2fb-demo-events-parser = il2fb.demo_services.events_parser.main:main',
         ],
     },
 )

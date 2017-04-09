@@ -11,7 +11,10 @@ import aiohttp_cors
 
 from aiohttp import web
 
+from il2fb.parsers.events import EventsParser
+
 from .config import load_config
+from .reporter import setup_reporter
 from .routes import setup_routes
 
 
@@ -20,7 +23,7 @@ __here__ = pathlib.Path(__file__).absolute().parent
 
 def load_args():
     parser = argparse.ArgumentParser(
-        description="Demo service of 'il2fb-difficulty' library"
+        description="Demo service of 'il2fb-events-parser' library"
     )
     parser.add_argument(
         '-c', '--config',
@@ -35,9 +38,11 @@ def load_args():
 def build_app(loop, config, **kwargs):
     app = web.Application(loop=loop, **kwargs)
     app['config'] = config
+    app['events_parser'] = EventsParser()
 
     setup_routes(app)
     setup_cors(app)
+    setup_reporter(app, loop)
 
     return app
 
