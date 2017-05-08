@@ -37,9 +37,30 @@ CONFIG_SCHEMA = {
         },
         'cors': {
             'type': 'object',
-        }
+        },
+        'mission_max_size': {
+            'type': 'integer',
+            'minimum': 0,
+        },
+        'github': {
+            'type': 'object',
+            'properties': {
+                'access_token': {
+                    'type': 'string',
+                },
+                'repo_owner': {
+                    'type': 'string',
+                },
+                'repo_name': {
+                    'type': 'string',
+                },
+            },
+            'required': ['access_token', 'repo_owner', 'repo_name', ],
+        },
     },
-    'required': ['bind', 'logging', 'access_log_format', ]
+    'required': [
+        'bind', 'logging', 'access_log_format', 'github', 'mission_max_size',
+    ]
 }
 
 CONFIG_DEFAULTS = {
@@ -76,6 +97,7 @@ CONFIG_DEFAULTS = {
         '%a %l %u "%r" %s %b %Dms "%{Referrer}i" "%{User-Agent}i"'
     ),
     'cors': {},
+    'mission_max_size': 1 * 1024 * 1024,  # 1 MiB for uploads
 }
 
 

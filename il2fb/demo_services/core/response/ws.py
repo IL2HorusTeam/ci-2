@@ -1,6 +1,6 @@
 # coding: utf-8
 
-import ujson as json
+from il2fb.demo_services.core import json
 
 
 def WSSuccess(payload=None, detail=None):

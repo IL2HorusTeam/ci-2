@@ -2,9 +2,9 @@
 
 import abc
 
-import ujson as json
-
 from aiohttp import web
+
+from il2fb.demo_services.core import json
 
 
 class RESTResponse(web.Response, abc.ABC):

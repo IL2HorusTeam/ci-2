@@ -20,7 +20,7 @@ __here__ = pathlib.Path(__file__).absolute().parent
 
 def load_args():
     parser = argparse.ArgumentParser(
-        description="Demo service of 'il2fb-difficulty' library"
+        description="Demo service of 'il2fb-ds-config' library"
     )
     parser.add_argument(
         '-c', '--config',
@@ -33,7 +33,10 @@ def load_args():
 
 
 def build_app(loop, config, **kwargs):
-    app = web.Application(loop=loop, **kwargs)
+    kwargs['loop'] = loop
+    kwargs['client_max_size'] = config['mission_max_size']
+
+    app = web.Application(**kwargs)
     app['config'] = config
 
     setup_routes(app)

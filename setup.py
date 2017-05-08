@@ -27,6 +27,7 @@ with open(os.path.join(__here__, 'requirements.txt')) as f:
     REQUIREMENTS = [x for x in REQUIREMENTS if x and not x.startswith('#')]
     REQUIREMENTS, DEPENDENCIES = split_requirements(REQUIREMENTS)
 
+
 README = open(os.path.join(__here__, 'README.rst')).read()
 
 
@@ -51,6 +52,8 @@ setup(
         'il2fb.demo_services.core.response',
         'il2fb.demo_services.difficulty',
         'il2fb.demo_services.events_parser',
+        'il2fb.demo_services.mission_parser',
+        'il2fb.demo_services.ds_config',
     ],
     include_package_data=True,
     install_requires=REQUIREMENTS,
@@ -72,6 +75,8 @@ setup(
         'console_scripts': [
             'il2fb-demo-difficulty = il2fb.demo_services.difficulty.main:main',
             'il2fb-demo-events-parser = il2fb.demo_services.events_parser.main:main',
+            'il2fb-demo-mission-parser = il2fb.demo_services.mission_parser.main:main',
+            'il2fb-demo-ds-config = il2fb.demo_services.ds_config.main:main',
         ],
     },
 )

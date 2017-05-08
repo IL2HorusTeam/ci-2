@@ -3,11 +3,10 @@
 import logging
 import traceback
 
-import ujson as json
-
 from aiohttp import web, WSMsgType
 from il2fb.parsers.events.exceptions import EventParsingError
 
+from il2fb.demo_services.core import json
 from il2fb.demo_services.core.response.rest import RESTSuccess
 from il2fb.demo_services.core.response.ws import WSSuccess, WSError, WSWarning
 

@@ -7,9 +7,9 @@ import logging
 import logging.config
 import pathlib
 
-import aiohttp_cors
-
 from aiohttp import web
+
+import aiohttp_cors
 
 from il2fb.parsers.events import EventsParser
 

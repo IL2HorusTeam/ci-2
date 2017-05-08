@@ -2,14 +2,13 @@
 
 import itertools
 
-import ujson as json
-
 from il2fb.config.difficulty import decompose, autocorrect_difficulty
 from il2fb.config.difficulty import get_actual_rules, toggle_parameter
 from il2fb.config.difficulty.constants import PRESETS, SETTINGS, RULE_TYPES
 from il2fb.config.difficulty.constants import PARAMETERS
 from il2fb.config.difficulty.exceptions import LockedParameterException
 
+from il2fb.demo_services.core import json
 from il2fb.demo_services.core.response.rest import RESTSuccess, RESTConflict
 
 from .serializers import serialize_presets, serialize_settings

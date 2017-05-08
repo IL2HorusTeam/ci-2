@@ -1,7 +1,7 @@
-aiohttp==2.0.6
 aiohttp-cors==0.5.2
+aiohttp==2.0.7
+itsdangerous==0.24
 jsonschema==2.6.0
-ujson==1.35
 PyYAML==3.12
 
 -e git+https://github.com/IL2HorusTeam/il2fb-commons.git#egg=il2fb-commons

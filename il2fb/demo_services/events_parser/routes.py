@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from .views import http_get_data, WSParseView
+from .views import WSParseView, http_get_data
 
 
 def setup_routes(app):
