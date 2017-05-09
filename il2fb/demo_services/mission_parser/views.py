@@ -15,6 +15,11 @@ from .constants import ALLOWED_CONTENT_TYPES, ALLOWED_EXTENSIONS
 LOG = logging.getLogger(__name__)
 
 
+async def http_health(request):
+    pretty = 'pretty' in request.query
+    return RESTSuccess(payload={'status': 'alive'}, pretty=pretty)
+
+
 class ParseView(web.View):
 
     async def post(self):

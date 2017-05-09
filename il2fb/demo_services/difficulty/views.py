@@ -14,6 +14,11 @@ from il2fb.demo_services.core.response.rest import RESTSuccess, RESTConflict
 from .serializers import serialize_presets, serialize_settings
 
 
+async def http_health(request):
+    pretty = 'pretty' in request.query
+    return RESTSuccess(payload={'status': 'alive'}, pretty=pretty)
+
+
 async def http_get_data(request):
     pretty = 'pretty' in request.query
     presets = serialize_presets(PRESETS)

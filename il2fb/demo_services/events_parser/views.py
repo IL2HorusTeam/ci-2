@@ -16,6 +16,11 @@ from .helpers import get_supported_events
 LOG = logging.getLogger(__name__)
 
 
+async def http_health(request):
+    pretty = 'pretty' in request.query
+    return RESTSuccess(payload={'status': 'alive'}, pretty=pretty)
+
+
 async def http_get_data(request):
     pretty = 'pretty' in request.query
     return RESTSuccess(
