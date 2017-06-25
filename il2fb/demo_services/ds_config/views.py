@@ -61,6 +61,8 @@ class ParseFileView(web.View):
 
         try:
             self.content = config.file.read().decode()
+            ini = configparser.ConfigParser()
+            ini.readfp(io.StringIO(self.content))
         except Exception as e:
             LOG.exception(
                 f"failed to read config '{self.file_name}'"
@@ -68,9 +70,6 @@ class ParseFileView(web.View):
             return RESTBadRequest(
                 detail=f"Oops! Failed to read config: {e}",
             )
-
-        ini = configparser.ConfigParser()
-        ini.readfp(io.BytesIO(self.content))
 
         try:
             data = ServerConfig.from_ini(ini).to_primitive()

@@ -10,6 +10,6 @@ def setup_routes(app):
     app.router.add_get(
         '/default', DefaultView,
     )
-    app.router.add_get(
+    app.router.add_post(
         '/parse/file', ParseFileView,
     )
