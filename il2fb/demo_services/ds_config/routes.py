@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from .views import DefaultView, ParseFileView, http_health
+from .views import DefaultView, ParseFileView, ComposeFileView, http_health
 
 
 def setup_routes(app):
@@ -11,5 +11,8 @@ def setup_routes(app):
         '/default', DefaultView,
     )
     app.router.add_post(
-        '/parse/file', ParseFileView,
+        '/file/parse', ParseFileView,
+    )
+    app.router.add_post(
+        '/file/compose', ComposeFileView,
     )

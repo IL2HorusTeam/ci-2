@@ -8,6 +8,7 @@ from aiohttp import web
 
 from il2fb.config.ds import ServerConfig
 
+from il2fb.demo_services.core import json
 from il2fb.demo_services.core.response.rest import RESTBadRequest, RESTSuccess
 
 from .constants import ALLOWED_CONTENT_TYPES, ALLOWED_EXTENSIONS
@@ -62,7 +63,7 @@ class ParseFileView(web.View):
         try:
             self.content = config.file.read().decode()
             ini = configparser.ConfigParser()
-            ini.readfp(io.StringIO(self.content))
+            ini.read_string(self.content)
         except Exception as e:
             LOG.exception(
                 f"failed to read config '{self.file_name}'"
@@ -111,3 +112,44 @@ class ParseFileView(web.View):
 
     async def on_parsing_error(self):
         return {}
+
+
+class ComposeFileView(web.View):
+
+    async def post(self):
+        pretty = 'pretty' in self.request.query
+
+        try:
+            content = await self.request.json(loads=json.loads)
+        except Exception as e:
+            LOG.exception("failed to upload config")
+            return RESTBadRequest(
+                detail=f"Oops! Failed to upload config: {e}",
+            )
+
+        try:
+            ini = configparser.ConfigParser()
+            ini.optionxform = str
+            ServerConfig.from_flat(content).to_ini(ini)
+        except Exception as e:
+            LOG.exception("failed to compose config")
+            return RESTBadRequest(
+                detail=f"Oops! Failed to compose config: {e}",
+            )
+
+        try:
+            f = io.StringIO()
+            ini.write(f, space_around_delimiters=False)
+            data = f.getvalue()
+        except Exception as e:
+            LOG.exception("failed to dump config")
+            return RESTBadRequest(
+                detail=f"Oops! Failed to dump config: {e}",
+            )
+
+        return RESTSuccess(
+            payload={
+                'data': data,
+            },
+            pretty=pretty,
+        )
