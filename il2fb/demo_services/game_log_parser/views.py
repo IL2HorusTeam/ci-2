@@ -76,7 +76,7 @@ class WSParseView(web.View):
         reporter = self.request.app['bug_reporter']
 
         similar_issues = await reporter.get_similar_issues(title=string)
-        similar_issues = map(reporter.shorten_issue, similar_issues)
+        similar_issues = list(map(reporter.shorten_issue, similar_issues))
         payload = {
             'similar': similar_issues,
             'traceback': traceback.format_exc(),
