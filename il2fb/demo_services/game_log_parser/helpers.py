@@ -2,7 +2,7 @@
 
 from operator import itemgetter
 
-from il2fb.parsers.events.events import get_all_events
+from il2fb.parsers.game_log.events import get_all_events
 
 
 def get_supported_events():

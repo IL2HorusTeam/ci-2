@@ -6,7 +6,7 @@ PyYAML==3.12
 
 -e git+https://github.com/IL2HorusTeam/il2fb-commons.git#egg=il2fb-commons
 -e git+https://github.com/IL2HorusTeam/il2fb-difficulty.git#egg=il2fb-difficulty
--e git+https://github.com/IL2HorusTeam/il2fb-events-parser.git#egg=il2fb-events-parser
+-e git+https://github.com/IL2HorusTeam/il2fb-game-log-parser.git#egg=il2fb-game-log-parser
 -e git+https://github.com/IL2HorusTeam/il2fb-mission-parser.git#egg=il2fb-mission-parser
 -e git+https://github.com/IL2HorusTeam/il2fb-github-bug-reporter.git#egg=il2fb-github-bug-reporter
 -e git+https://github.com/IL2HorusTeam/il2fb-ds-config.git#egg=il2fb-ds-config

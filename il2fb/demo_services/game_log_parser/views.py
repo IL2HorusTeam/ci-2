@@ -4,7 +4,7 @@ import logging
 import traceback
 
 from aiohttp import web, WSMsgType
-from il2fb.parsers.events.exceptions import EventParsingError
+from il2fb.commons.events import EventParsingException
 
 from il2fb.demo_services.core import json
 from il2fb.demo_services.core.response.rest import RESTSuccess
@@ -63,8 +63,8 @@ class WSParseView(web.View):
         string = data.get('string')
         if string:
             try:
-                event = self.request.app['events_parser'].parse(string)
-            except EventParsingError:
+                event = self.request.app['game_log_parser'].parse(string)
+            except EventParsingException:
                 LOG.exception("Failed to parse string `{}`".format(string))
                 await self.on_parsing_error(string)
             else:

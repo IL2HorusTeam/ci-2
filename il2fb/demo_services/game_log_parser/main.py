@@ -11,7 +11,7 @@ from aiohttp import web
 
 import aiohttp_cors
 
-from il2fb.parsers.events import EventsParser
+from il2fb.parsers.game_log import GameLogEventParser
 
 from .config import load_config
 from .reporter import setup_reporter
@@ -38,7 +38,7 @@ def load_args():
 def build_app(loop, config, **kwargs):
     app = web.Application(loop=loop, **kwargs)
     app['config'] = config
-    app['events_parser'] = EventsParser()
+    app['game_log_parser'] = GameLogEventParser()
 
     setup_routes(app)
     setup_cors(app)

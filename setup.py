@@ -33,7 +33,7 @@ README = open(os.path.join(__here__, 'README.rst')).read()
 
 setup(
     name='il2fb-demo-services',
-    version='2.0.0',
+    version='2.1.0',
     description="Demo services for IL-2 FB libraries",
     long_description=README,
     keywords=[
@@ -51,7 +51,7 @@ setup(
         'il2fb.demo_services.core',
         'il2fb.demo_services.core.response',
         'il2fb.demo_services.difficulty',
-        'il2fb.demo_services.events_parser',
+        'il2fb.demo_services.game_log_parser',
         'il2fb.demo_services.mission_parser',
         'il2fb.demo_services.ds_config',
     ],
@@ -74,7 +74,7 @@ setup(
     entry_points={
         'console_scripts': [
             'il2fb-demo-difficulty = il2fb.demo_services.difficulty.main:main',
-            'il2fb-demo-events-parser = il2fb.demo_services.events_parser.main:main',
+            'il2fb-demo-game-log-parser = il2fb.demo_services.game_log_parser.main:main',
             'il2fb-demo-mission-parser = il2fb.demo_services.mission_parser.main:main',
             'il2fb-demo-ds-config = il2fb.demo_services.ds_config.main:main',
         ],
