@@ -132,4 +132,4 @@ steps:
     '--memory', '128MB',
   ]
   waitFor: ['-']
-  dir: 'missin_parser/parse'
+  dir: 'mission_parser/parse'
