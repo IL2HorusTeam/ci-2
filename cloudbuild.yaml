@@ -1,0 +1,117 @@
+steps:
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: [
+    'beta', 'functions', 'deploy',
+    'difficulty-get-data',
+    '--entry-point', 'get_data',
+    '--set-env-vars', 'CORS_ALLOW_ORIGIN=*',
+    '--region', 'europe-west1',
+    '--runtime', 'python37',
+    '--memory', '128MB',
+  ]
+  dir: 'difficulty/get_data'
+
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: [
+    'beta', 'functions', 'deploy',
+    'difficulty-decompose-value',
+    '--entry-point', 'decompose_value',
+    '--set-env-vars', 'CORS_ALLOW_ORIGIN=*',
+    '--region', 'europe-west1',
+    '--runtime', 'python37',
+    '--memory', '128MB',
+  ]
+  dir: 'difficulty/decompose_value'
+
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: [
+    'beta', 'functions', 'deploy',
+    'difficulty-toggle-value',
+    '--entry-point', 'toggle_value',
+    '--set-env-vars', 'CORS_ALLOW_ORIGIN=*',
+    '--region', 'europe-west1',
+    '--runtime', 'python37',
+    '--memory', '128MB',
+  ]
+  dir: 'difficulty/toggle_value'
+
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: [
+    'beta', 'functions', 'deploy',
+    'ds-config-default',
+    '--entry-point', 'get_defaults',
+    '--set-env-vars', 'CORS_ALLOW_ORIGIN=*',
+    '--region', 'europe-west1',
+    '--runtime', 'python37',
+    '--memory', '128MB',
+  ]
+  dir: 'ds_config/get_defaults'
+
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: [
+    'beta', 'functions', 'deploy',
+    'ds-config-compose',
+    '--entry-point', 'compose',
+    '--set-env-vars', 'CORS_ALLOW_ORIGIN=*',
+    '--region', 'europe-west1',
+    '--runtime', 'python37',
+    '--memory', '128MB',
+  ]
+  dir: 'ds_config/compose'
+
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: [
+    'beta', 'functions', 'deploy',
+    'ds-config-parse',
+    '--entry-point', 'parse',
+    '--set-env-vars', 'CORS_ALLOW_ORIGIN=*',
+    '--region', 'europe-west1',
+    '--runtime', 'python37',
+    '--memory', '128MB',
+  ]
+  dir: 'ds_config/parse'
+
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: [
+    'beta', 'functions', 'deploy',
+    'events-parse',
+    '--entry-point', 'parse',
+    '--set-env-vars', 'CORS_ALLOW_ORIGIN=*',
+    '--region', 'europe-west1',
+    '--runtime', 'python37',
+    '--memory', '128MB',
+  ]
+  dir: 'events_parser/parse'
+
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: [
+    'beta', 'functions', 'deploy',
+    'events-parser-data',
+    '--entry-point', 'get_data',
+    '--set-env-vars', 'CORS_ALLOW_ORIGIN=*',
+    '--region', 'europe-west1',
+    '--runtime', 'python37',
+    '--memory', '128MB',
+  ]
+  dir: 'events_parser/get_data'
+
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: [
+    'beta', 'functions', 'deploy',
+    ' missions-parse',
+    '--entry-point', 'parse',
+    '--set-env-vars', 'CORS_ALLOW_ORIGIN=*',
+    '--region', 'europe-west1',
+    '--runtime', 'python37',
+    '--memory', '128MB',
+  ]
+  dir: 'missin_parser/parse'
