@@ -1,0 +1,26 @@
+- name: difficulty-get-data
+  methods: ['GET', 'OPTIONS']
+
+- name: difficulty-decompose-value
+  methods: ['GET', 'OPTIONS']
+
+- name: difficulty-toggle-value
+  methods: ['GET', 'OPTIONS']
+
+- name: ds-config-default
+  methods: ['GET', 'OPTIONS']
+
+- name: ds-config-parse
+  methods: ['POST', 'OPTIONS']
+
+- name: ds-config-compose
+  methods: ['POST', 'OPTIONS']
+
+- name: missions-parse
+  methods: ['POST', 'OPTIONS']
+
+- name: events-parser-data
+  methods: ['GET', 'OPTIONS']
+
+- name: events-parse
+  methods: ['POST', 'OPTIONS']

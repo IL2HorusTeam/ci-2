@@ -1,0 +1,26 @@
+- name: difficulty-get-data
+  handler: demo_services.difficulty.views:get_data
+
+- name: difficulty-decompose-value
+  handler: demo_services.difficulty.views:decompose_value
+
+- name: difficulty-toggle-value
+  handler: demo_services.difficulty.views:toggle_value
+
+- name: ds-config-default
+  handler: demo_services.ds_config.views:get_defaults
+
+- name: ds-config-parse
+  handler: demo_services.ds_config.views:parse
+
+- name: ds-config-compose
+  handler: demo_services.ds_config.views:compose
+
+- name: missions-parse
+  handler: demo_services.mission_parser.views:parse
+
+- name: events-parser-data
+  handler: demo_services.events_parser.views:get_data
+
+- name: events-parse
+  handler: demo_services.events_parser.views:parse
