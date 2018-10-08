@@ -11,6 +11,7 @@ steps:
     '--runtime', 'python37',
     '--memory', '128MB',
   ]
+  waitFor: ['-']
   dir: 'difficulty/get_data'
 
 
@@ -25,6 +26,7 @@ steps:
     '--runtime', 'python37',
     '--memory', '128MB',
   ]
+  waitFor: ['-']
   dir: 'difficulty/decompose_value'
 
 
@@ -39,6 +41,7 @@ steps:
     '--runtime', 'python37',
     '--memory', '128MB',
   ]
+  waitFor: ['-']
   dir: 'difficulty/toggle_value'
 
 
@@ -53,6 +56,7 @@ steps:
     '--runtime', 'python37',
     '--memory', '128MB',
   ]
+  waitFor: ['-']
   dir: 'ds_config/get_defaults'
 
 
@@ -67,6 +71,7 @@ steps:
     '--runtime', 'python37',
     '--memory', '128MB',
   ]
+  waitFor: ['-']
   dir: 'ds_config/compose'
 
 
@@ -81,6 +86,7 @@ steps:
     '--runtime', 'python37',
     '--memory', '128MB',
   ]
+  waitFor: ['-']
   dir: 'ds_config/parse'
 
 
@@ -95,6 +101,7 @@ steps:
     '--runtime', 'python37',
     '--memory', '128MB',
   ]
+  waitFor: ['-']
   dir: 'events_parser/parse'
 
 
@@ -109,6 +116,7 @@ steps:
     '--runtime', 'python37',
     '--memory', '128MB',
   ]
+  waitFor: ['-']
   dir: 'events_parser/get_data'
 
 
@@ -123,4 +131,5 @@ steps:
     '--runtime', 'python37',
     '--memory', '128MB',
   ]
+  waitFor: ['-']
   dir: 'missin_parser/parse'
