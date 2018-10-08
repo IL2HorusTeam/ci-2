@@ -1,0 +1,5 @@
+Flask==1.0.2
+il2fb-commons==1.0.1
+il2fb-game-log-parser==1.0.3
+itsdangerous==0.24
+

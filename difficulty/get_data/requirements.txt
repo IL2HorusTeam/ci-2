@@ -1,0 +1,4 @@
+Flask==1.0.2
+il2fb-difficulty==1.3.1
+itsdangerous==0.24
+

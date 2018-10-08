@@ -1,0 +1,4 @@
+Flask==1.0.2
+il2fb-ds-config==1.0.0
+itsdangerous==0.24
+
